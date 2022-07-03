@@ -9,7 +9,10 @@ import com.hishd.kotlintmdbdemo.databinding.RowMovieItemBinding
 import com.hishd.kotlintmdbdemo.model.MovieModel
 import com.squareup.picasso.Picasso
 
-class MovieListAdapter(private val movieList: List<MovieModel>, private val callback: (MovieModel) -> Unit): RecyclerView.Adapter<MovieListAdapterViewHolder>() {
+class MovieListAdapter(private val callback: (MovieModel) -> Unit): RecyclerView.Adapter<MovieListAdapterViewHolder>() {
+
+    private var movieList: List<MovieModel> = listOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListAdapterViewHolder {
         val binding = RowMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieListAdapterViewHolder(binding = binding)
@@ -23,6 +26,11 @@ class MovieListAdapter(private val movieList: List<MovieModel>, private val call
 
     override fun getItemCount(): Int {
         return movieList.count()
+    }
+
+    fun setData(movies: List<MovieModel>) {
+        this.movieList = movies
+        notifyDataSetChanged()
     }
 }
 
