@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hishd.kotlintmdbdemo.adapters.MovieListAdapter
 import com.hishd.kotlintmdbdemo.viewmodel.MainActivityViewModel
@@ -11,6 +12,7 @@ import com.hishd.kotlintmdbdemo.databinding.ActivityMainBinding
 import com.hishd.kotlintmdbdemo.model.MovieModel
 import com.hishd.kotlintmdbdemo.services.APIService
 import com.hishd.kotlintmdbdemo.viewmodel.MainActivityViewModelFactory
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,11 +28,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupRes()
         setupObservers()
-    }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.loadData()
+        lifecycleScope.launchWhenStarted {
+            viewModel.loadData()
+        }
     }
 
     private fun setupRes() {
