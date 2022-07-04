@@ -30,6 +30,7 @@ object APIService {
                 throw APIServiceException("Error $it")
             })
 
+        request.setShouldCache(false)
         Volley.newRequestQueue(context).add(request)
     }
 }

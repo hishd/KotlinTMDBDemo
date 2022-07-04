@@ -29,9 +29,9 @@ class MainActivity : AppCompatActivity() {
         setupRes()
         setupObservers()
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.loadData()
-        }
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.loadData()
+//        }
     }
 
     private fun setupRes() {
